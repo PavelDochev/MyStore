@@ -2,23 +2,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import serverUtils from '../_helpers/serverUtils';
 
 @Injectable()
 export class AuthenticationService {
-    url:string = "http://localhost:8080/api/authenticate";
     constructor(private http: HttpClient) { }
 
 
     login(userName: string) {
         const httpOptions = {
             headers: new HttpHeaders({
-              'Content-Type':  'application/json',
-              'Authorization': 'fake-jwt-token'
+              'Content-Type':  'application/json'
             })
           };
           
         let body = userName;
-        return this.http.post<any>(this.url,body,httpOptions)
+        return this.http.post<any>(serverUtils.SERVER_URL + "/api/authenticate",body,httpOptions)
             .map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {

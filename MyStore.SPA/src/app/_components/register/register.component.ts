@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, UserService } from '../../_services/index';
-import { Web3Service } from '../../_services/web3.service';
+import { AlertService, UserService,Web3Service } from '../../_services/index';
+import { CryptoJSUtils } from '../../_helpers';
 
 @Component({
     moduleId: module.id.toString(),
@@ -10,7 +10,6 @@ import { Web3Service } from '../../_services/web3.service';
 })
 
 export class RegisterComponent implements OnInit{
-    
     model: any = {};
     loading = false;
 
@@ -18,22 +17,28 @@ export class RegisterComponent implements OnInit{
         private router: Router,
         private userService: UserService,
         private alertService: AlertService,
-        private web3Service:Web3Service) { }
+        private web3Service:Web3Service,
+        private cryptoJSUtils:CryptoJSUtils) { }
 
     ngOnInit(): void {
-        this.web3Service.initWeb3();
+        
     }
+
     async register() {
         this.loading = true;
         
-        //TODO:
         //web3 creates account 
+        var test = await this.web3Service.createNewAccount(this.model.password);
 
-        // var test = await this.web3Service.CreateAccount();
-        console.log(this.web3Service.CreateAccount());
         //encrypt private key with password
-        //send public key to db and encrypted private key
-        
+        this.model.privateKey = (this.cryptoJSUtils.encrypt(this.web3Service.account.privateKey,this.model.password)).toString();
+
+        //method to decrypt
+        // this.cryptoJSUtils.decrypt(this.model.privateKey,this.model.password);
+
+        //sha256 password
+        this.model.password = this.cryptoJSUtils.sha256(this.model.password);
+
         this.userService.create(this.model)
             .subscribe(
                 data => {
@@ -41,7 +46,7 @@ export class RegisterComponent implements OnInit{
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error("There is user with such username");
                     this.loading = false;
                 });
     }

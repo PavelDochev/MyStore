@@ -1,0 +1,11 @@
+.selectable:hover{
+    box-shadow: 0 0 0 3px blue;
+    cursor: pointer;
+}
+.selected{
+    box-shadow: 0 0 0 3px blue;
+}
+.item-buttons{
+    display: block;
+    width: 300px;
+}

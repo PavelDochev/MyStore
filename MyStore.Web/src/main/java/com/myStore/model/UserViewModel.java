@@ -6,7 +6,7 @@ public class UserViewModel {
     private String firstName;
     private String lastName;
     private String password;
-    private String encryptedPrivateKey;
+    private String privateKey;
     private String publicKey;
 
     //just to have some jwt(not implemented correctly)
@@ -60,19 +60,19 @@ public class UserViewModel {
         this.password = password;
     }
 
-    public String getEncryptedPrivateKey() {
-        return encryptedPrivateKey;
-    }
-
-    public void setEncryptedPrivateKey(String encryptedPrivateKey) {
-        this.encryptedPrivateKey = encryptedPrivateKey;
-    }
-
     public String getPublicKey() {
         return publicKey;
     }
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
     }
 }

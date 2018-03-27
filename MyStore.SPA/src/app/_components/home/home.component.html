@@ -1,12 +1,32 @@
-﻿<div class="col-md-6 col-md-offset-3">
-    <h1>Hi {{currentUser.firstName}}!</h1>
-    <p>You're logged My store</p>
-    <!-- <h3>All registered users:</h3> -->
-    <ul>
-        <li *ngFor="let user of users">
-            {{user.userName}} ({{user.firstName}} {{user.lastName}})
-            - <a (click)="deleteUser(user.id)">Delete</a>
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand">{{title}}</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="active">
+          <a class="nav-link" routerLink (click)="storeShown()">Store</a>
         </li>
-    </ul>
-    <p><a [routerLink]="['/login']">Logout</a></p>
+        <li>
+          <a class="nav-link" routerLink (click)="profileShown()">Profile</a>
+        </li>
+        <li>
+            <a class="nav-link" [routerLink]="['/login']">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div *ngIf="storeSelected">
+    <app-store></app-store>
+</div>
+<div *ngIf="profileSelected">
+    <app-profile></app-profile>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+    <h1>Hi {{currentUser.firstName}}!</h1>
+    <p>You're logged in My store</p>
 </div>

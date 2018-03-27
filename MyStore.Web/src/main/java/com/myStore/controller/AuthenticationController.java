@@ -36,13 +36,8 @@ public class AuthenticationController {
         }
 
         foundUser.setToken("fake-jwt-token");
-        //if userName == userName from DB
+
         return new ResponseEntity<>(foundUser,HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("api/createUser")
-    public ResponseEntity<UserViewModel> createUser(@RequestBody UserViewModel user){
-        //check if user exists
-        return new ResponseEntity<>(user,HttpStatus.ACCEPTED);
-    }
 }

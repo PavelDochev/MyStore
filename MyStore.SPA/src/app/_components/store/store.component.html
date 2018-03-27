@@ -1,3 +1,20 @@
-<p>
-  store works!
-</p>
+<div class="row">
+  <div *ngFor="let item of items" class="col-md-3">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body selectable" [ngClass]="{ selected: item.selected}" (click)="item.selected = !item.selected" >
+        <div class="card-text">
+          <p>
+             Name: {{item.name}}
+          </p>
+          <p>Price: {{item.price}}</p>
+          <p>
+           Description: {{item.description}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="item-buttons">
+  <button type="button" (click)="buyItem()" class="btn">Buy Item</button>
+</div>

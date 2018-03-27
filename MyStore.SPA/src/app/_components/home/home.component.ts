@@ -11,20 +11,28 @@ import { UserService } from '../../_services/index';
 export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
+    storeSelected:any;
+    profileSelected:any;
 
     constructor(private userService: UserService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
-    ngOnInit() {
-        this.loadAllUsers();
-    }
-    
-    deleteUser(id: number) {
-        this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+    storeShown(){
+        this.storeSelected = !this.storeSelected;
+        if(this.storeSelected){
+            this.profileSelected = false;
+        }
     }
 
-    private loadAllUsers() {
-        this.userService.getAll().subscribe(users => { this.users = users; });
+    profileShown(){
+        this.profileSelected = !this.profileSelected;
+        if(this.profileSelected){
+            this.storeSelected=false;
+        }
+    }
+
+    ngOnInit() {
+        this.storeSelected=true;
     }
 }
