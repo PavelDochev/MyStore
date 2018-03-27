@@ -19,14 +19,13 @@
     </div>
   </nav>
 
+<div>
+  <h1>Hi {{currentUser.firstName}}!</h1>
+</div>
+
 <div *ngIf="storeSelected">
     <app-store></app-store>
 </div>
 <div *ngIf="profileSelected">
     <app-profile></app-profile>
-</div>
-
-<div class="col-md-6 col-md-offset-3">
-    <h1>Hi {{currentUser.firstName}}!</h1>
-    <p>You're logged in My store</p>
 </div>

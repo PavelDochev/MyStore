@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, UserService,Web3Service } from '../../_services/index';
+import { AlertService, UserService } from '../../_services/index';
 import { CryptoJSUtils } from '../../_helpers';
+import { Web3Service } from '../../_services/web3.service';
 
 @Component({
     moduleId: module.id.toString(),
@@ -32,9 +33,6 @@ export class RegisterComponent implements OnInit{
 
         //encrypt private key with password
         this.model.privateKey = (this.cryptoJSUtils.encrypt(this.web3Service.account.privateKey,this.model.password)).toString();
-
-        //method to decrypt
-        // this.cryptoJSUtils.decrypt(this.model.privateKey,this.model.password);
 
         //sha256 password
         this.model.password = this.cryptoJSUtils.sha256(this.model.password);

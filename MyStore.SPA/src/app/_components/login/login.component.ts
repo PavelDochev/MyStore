@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AlertService, AuthenticationService, UserService, Web3Service } from '../../_services/index';
+import { AlertService, AuthenticationService, UserService} from '../../_services/index';
 import { CryptoJSUtils } from '../../_helpers';
+import { Web3Service } from '../../_services/web3.service';
 
 @Component({
     moduleId: module.id.toString(),
@@ -38,7 +39,9 @@ export class LoginComponent implements OnInit {
                 data => {
                     if(data.password == this.cryptoJSUtils.sha256(this.model.password))
                     {
-                        this.web3Service.createAccountFromPrivateKey(this.cryptoJSUtils.decrypt(data.privateKey,this.model.password))
+                        var privateKey = this.cryptoJSUtils.decrypt(data.privateKey,this.model.password);
+                        this.web3Service.createAccountFromPrivateKey(privateKey);
+                        sessionStorage.setItem("privateKey",privateKey);
                         this.router.navigate([this.returnUrl]);
                     }
                     else{

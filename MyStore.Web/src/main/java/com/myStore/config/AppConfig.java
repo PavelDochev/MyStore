@@ -14,16 +14,24 @@ public class AppConfig {
         itemToAdd.setId(0);
         itemToAdd.setName("Крик");
         itemToAdd.setDescription("За повдигане на колата");
-        itemToAdd.setPrice(10.2);
-
+        itemToAdd.setPrice(0.03);
+;
         Item anotherItemToAdd = new Item();
         anotherItemToAdd.setId(1);
         anotherItemToAdd.setName("Чистачка");
         anotherItemToAdd.setDescription("Чисти стъклото");
-        anotherItemToAdd.setPrice(3.2);
+        anotherItemToAdd.setPrice(0.2);
+
+
+        Item thirdItemToAdd = new Item();
+        thirdItemToAdd.setId(2);
+        thirdItemToAdd.setName("Гума");
+        thirdItemToAdd.setDescription("Търкаля се");
+        thirdItemToAdd.setPrice(0.4);
+        StoreDB.Items.add(thirdItemToAdd);
 
         StoreDB.Items.add(itemToAdd);
         StoreDB.Items.add(anotherItemToAdd);
-        return anotherItemToAdd;
+        return thirdItemToAdd;
     }
 }

@@ -1,3 +1,17 @@
-<p>
-  profile works!
-</p>
+<div class="row">
+  <div *ngFor="let history of userHistory" class="col-md-3">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body selectable">
+        <div class="card-text">
+          <p>
+             Name: {{history.itemName}}
+          </p>
+          <p>Price: {{history.price}} ether</p>
+          <p>
+            Date: {{history.date}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

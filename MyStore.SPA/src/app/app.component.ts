@@ -1,7 +1,8 @@
 ﻿import { Component } from '@angular/core';
 
 import '../assets/app.css';
-import { Web3Service, ContractService } from './_services';
+import {  ContractService } from './_services';
+import { Web3Service } from './_services/web3.service';
 
 @Component({
     moduleId: module.id.toString(),

@@ -7,7 +7,7 @@ contract Store {
         owner = msg.sender;
     }
 
-    event BoughtItem(address indexed _from, uint value,string itemName);
+    event BoughtItem(address indexed _from, uint value,string itemName,uint256 timestamp);
 
     modifier isOwner() {
         require(msg.sender == owner);
@@ -16,7 +16,7 @@ contract Store {
 
     function buyItem(string itemName) public payable {
 
-        BoughtItem(msg.sender,msg.value,itemName);
+        BoughtItem(msg.sender,msg.value,itemName,block.timestamp);
     }
 
     function withdraw(uint256 amount) public isOwner {
