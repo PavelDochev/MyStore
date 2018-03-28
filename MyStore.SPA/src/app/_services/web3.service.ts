@@ -25,8 +25,7 @@ export class Web3Service{
     public initWeb3(){
         this.web3 = new web3("https://ropsten.infura.io");
         var loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-        if(loggedUser != null){
-            console.log(sessionStorage.getItem("privateKey"));
+        if(sessionStorage.getItem("privateKey")!=null){
             this.createAccountFromPrivateKey(sessionStorage.getItem("privateKey"));
         }
         

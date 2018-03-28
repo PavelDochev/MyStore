@@ -20,7 +20,9 @@ export class HomeComponent implements OnInit {
     constructor(private userService: UserService,
                 private web3Service:Web3Service) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.userAddress = this.web3Service.account.address;
+        if(this.web3Service.account != null){
+            this.userAddress = this.web3Service.account.address;
+        }
     }
 
     storeShown(){
