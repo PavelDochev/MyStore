@@ -4,5 +4,5 @@ import com.myStore.model.UserViewModel;
 
 public interface AuthenticationService {
 
-    UserViewModel Authenticate(UserViewModel user);
+    UserViewModel authenticate(UserViewModel user);
 }

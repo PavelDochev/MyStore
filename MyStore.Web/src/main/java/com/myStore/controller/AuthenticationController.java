@@ -26,8 +26,12 @@ public class AuthenticationController {
 
     @PostMapping("api/authenticate")
     @CrossOrigin
-    public ResponseEntity<UserViewModel> Authenticate(@RequestBody String userName) {
+    public ResponseEntity<UserViewModel> authenticate(@RequestBody String userName) {
 
+        //TODO
+        // TODO: 28.3.2018 г.  
+        // FIXME: 28.3.2018 г.
+//        this.authenticationService.authenticate(userName);
         //check if userExists in db
         UserViewModel foundUser = this.userService.GetUserByUserName(userName);
 

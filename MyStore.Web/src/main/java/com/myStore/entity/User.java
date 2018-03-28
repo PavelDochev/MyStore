@@ -1,23 +1,27 @@
 package com.myStore.entity;
 
-
+import javax.persistence.*;
 import java.util.Set;
-
+@Entity
+@Table(name="users")
 public class User {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String userName;
     private String firstName;
     private String lastName;
     private String password;
     private String privateKey;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private Set<Item> items;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
