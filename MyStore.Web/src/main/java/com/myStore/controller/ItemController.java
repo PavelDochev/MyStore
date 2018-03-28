@@ -21,6 +21,6 @@ public class ItemController {
     @CrossOrigin
     @GetMapping("api/items")
     public List<ItemViewModel> GetItems(){
-        return this.itemService.GetItems();
+        return this.itemService.getAll();
     }
 }

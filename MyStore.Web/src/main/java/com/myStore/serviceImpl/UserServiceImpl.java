@@ -1,8 +1,10 @@
 package com.myStore.serviceImpl;
 
+import com.myStore.entity.Item;
 import com.myStore.entity.User;
-import com.myStore.fakeDB.StoreDB;
+import com.myStore.model.ItemViewModel;
 import com.myStore.model.UserViewModel;
+import com.myStore.repository.UserRepository;
 import com.myStore.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,35 +14,39 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository,ModelMapper modelMapper) {
+        this.userRepository= userRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public UserViewModel CreateUser(UserViewModel user) {
+    public UserViewModel create(UserViewModel user) {
         User userToAdd = this.modelMapper.map(user,User.class);
-        if (StoreDB.Users == null) {
-            userToAdd.setId(0);
-        } else {
-            userToAdd.setId(StoreDB.Users.size());
-        }
-        StoreDB.Users.add(userToAdd);
+        this.userRepository.saveAndFlush(userToAdd);
 
         return this.modelMapper.map(userToAdd,UserViewModel.class);
 
     }
 
     @Override
-    public UserViewModel GetUserByUserName(String userName) {
-        if (StoreDB.Users != null) {
-            for (User x : StoreDB.Users) {
-                if (x.getUserName().equals(userName)) {
-                    return this.modelMapper.map(x,UserViewModel.class);
-                }
-            }
+    public UserViewModel getByUserName(String userName) {
+        User user = this.userRepository.findByUserName(userName);
+        if(user!=null){
+            return this.modelMapper.map(user,UserViewModel.class);
         }
         return null;
+    }
+
+    @Override
+    public void addItem(String userName,ItemViewModel itemToAdd) {
+        User userToUpdate = this.userRepository.findByUserName(userName);
+
+        if(userToUpdate!=null){
+            userToUpdate.addItem(this.modelMapper.map(itemToAdd,Item.class));
+            this.userRepository.saveAndFlush(userToUpdate);
+        }
     }
 }

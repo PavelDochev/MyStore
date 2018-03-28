@@ -1,10 +1,13 @@
 package com.myStore.service;
 
+import com.myStore.model.ItemViewModel;
 import com.myStore.model.UserViewModel;
 
 public interface UserService {
-    UserViewModel CreateUser(UserViewModel user);
+    UserViewModel create(UserViewModel user);
 
-    UserViewModel GetUserByUserName(String userName);
+    UserViewModel getByUserName(String userName);
+
+    void addItem(String userName,ItemViewModel item);
 
 }

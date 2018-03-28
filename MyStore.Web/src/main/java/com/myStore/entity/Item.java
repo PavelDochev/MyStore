@@ -1,16 +1,20 @@
 package com.myStore.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "items")
-public class Item {
+public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String description;
     private double price;
+
+    @ManyToOne
+    private User user;
 
     public long getId() {
         return id;

@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from '../_models/index';
+import { User, Item } from '../_models/index';
 import serverUtils from '../_helpers/serverUtils';
 
 @Injectable()
@@ -15,5 +15,9 @@ export class UserService {
 
     create(user:User) {
         return this.http.post(serverUtils.SERVER_URL + '/api/users/create', user);
+    }
+
+    buyItem(userName:string,itemToBuy:Item){
+        return this.http.post(serverUtils.SERVER_URL+'/api/users/buyItem/'+userName,itemToBuy);
     }
 }

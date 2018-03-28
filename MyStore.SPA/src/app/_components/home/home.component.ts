@@ -15,13 +15,15 @@ export class HomeComponent implements OnInit {
     storeSelected:any;
     profileSelected:any;
     userAddress:any;
-
+    userBalance:any;
 
     constructor(private userService: UserService,
                 private web3Service:Web3Service) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if(this.web3Service.account != null){
             this.userAddress = this.web3Service.account.address;
+            this.web3Service.web3.eth.getBalance(this.web3Service.web3.eth.accounts.wallet[0].address).then(x=>
+                this.userBalance=this.web3Service.web3.utils.fromWei(x.toString(),'ether'));
         }
     }
 

@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ItemService {
 
-    ItemViewModel BuyItem(ItemViewModel itemToAdd);
+    ItemViewModel create(ItemViewModel itemToAdd);
 
-    List<ItemViewModel> GetItems();
+    List<ItemViewModel> getAll();
 
-    ItemViewModel GetItemById(int id);
+    ItemViewModel getById(long id);
 
 }

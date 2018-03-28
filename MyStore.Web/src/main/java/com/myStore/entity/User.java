@@ -1,10 +1,12 @@
 package com.myStore.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -15,7 +17,7 @@ public class User {
     private String privateKey;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Item> items;
+    private List<Item> items;
 
     public long getId() {
         return id;
@@ -65,11 +67,15 @@ public class User {
         this.privateKey = privateKey;
     }
 
-    public Set<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Set<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public void addItem(Item item){
+        this.items.add(item);
     }
 }

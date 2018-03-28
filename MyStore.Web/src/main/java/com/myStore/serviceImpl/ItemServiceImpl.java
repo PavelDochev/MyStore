@@ -1,7 +1,6 @@
 package com.myStore.serviceImpl;
 
 import com.myStore.entity.Item;
-import com.myStore.fakeDB.StoreDB;
 import com.myStore.model.ItemViewModel;
 import com.myStore.repository.ItemRepository;
 import com.myStore.service.ItemService;
@@ -22,22 +21,20 @@ public class ItemServiceImpl implements ItemService {
         this.itemRepository = itemRepository;
         this.modelMapper = modelMapper;
     }
-
     @Override
-    public ItemViewModel BuyItem(ItemViewModel itemToAdd){
-        Item itemToBeAdded = this.modelMapper.map(itemToAdd,Item.class);
+    public ItemViewModel create(ItemViewModel itemToAdd) {
+        Item item = this.modelMapper.map(itemToAdd,Item.class);
 
-        StoreDB.Items.add(itemToBeAdded);
+        this.itemRepository.saveAndFlush(item);
 
-        //return last added item
-        return this.modelMapper.map(StoreDB.Items.get(StoreDB.Items.size()-1),ItemViewModel.class);
+        return this.modelMapper.map(this.itemRepository.findFirstByOrderByIdDesc(),ItemViewModel.class);
     }
 
     @Override
-    public List<ItemViewModel> GetItems(){
-        List<ItemViewModel> items = new ArrayList<>();
+    public List<ItemViewModel> getAll() {
 
-        StoreDB.Items.forEach(x->
+        List<ItemViewModel> items = new ArrayList<>();
+        this.itemRepository.findAll().forEach(x->
                 items.add(this.modelMapper.map(x,ItemViewModel.class))
         );
 
@@ -45,12 +42,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemViewModel GetItemById(int id) {
-        for (Item x : StoreDB.Items) {
-            if (x.getId() == id) {
-                return this.modelMapper.map(x, ItemViewModel.class);
-            }
-        }
-        return null;
+    public ItemViewModel getById(long id) {
+
+        return this.modelMapper.map(this.itemRepository.findById(id),ItemViewModel.class);
     }
 }

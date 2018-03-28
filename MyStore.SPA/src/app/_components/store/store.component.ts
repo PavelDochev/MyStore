@@ -27,7 +27,8 @@ export class StoreComponent implements OnInit {
   buyItem(){
     var selectedItem = this.items.find(x=>x.selected==true);
     if(selectedItem!=null){
-      this.contractService.buyItem(selectedItem.price,selectedItem.name);
+      var user = JSON.parse(localStorage.getItem('currentUser'));
+      this.contractService.buyItem(user.userName,selectedItem.price,selectedItem);
     }
     else{
       this.alertService.error("Please select item");
