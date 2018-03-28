@@ -3,6 +3,7 @@ package com.myStore.serviceImpl;
 import com.myStore.entity.Item;
 import com.myStore.fakeDB.StoreDB;
 import com.myStore.model.ItemViewModel;
+import com.myStore.repository.ItemRepository;
 import com.myStore.service.ItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,11 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
     private ModelMapper modelMapper;
+    private ItemRepository itemRepository;
 
     @Autowired
-    public ItemServiceImpl(ModelMapper modelMapper){
+    public ItemServiceImpl(ItemRepository itemRepository,ModelMapper modelMapper){
+        this.itemRepository = itemRepository;
         this.modelMapper = modelMapper;
     }
 

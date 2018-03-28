@@ -14,7 +14,7 @@ public class User {
     private String password;
     private String privateKey;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Item> items;
 
     public long getId() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
-    public UserViewModel Authenticate(UserViewModel user) {
+    public UserViewModel authenticate(UserViewModel user) {
 
         return null;
     }

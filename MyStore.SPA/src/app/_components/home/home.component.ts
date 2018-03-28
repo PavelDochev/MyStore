@@ -2,6 +2,7 @@
 
 import { User } from '../../_models/index';
 import { UserService } from '../../_services/index';
+import { Web3Service } from '../../_services/web3.service';
 
 @Component({
     moduleId: module.id.toString(),
@@ -13,9 +14,13 @@ export class HomeComponent implements OnInit {
     users: User[] = [];
     storeSelected:any;
     profileSelected:any;
+    userAddress:any;
 
-    constructor(private userService: UserService) {
+
+    constructor(private userService: UserService,
+                private web3Service:Web3Service) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.userAddress = this.web3Service.account.address;
     }
 
     storeShown(){
