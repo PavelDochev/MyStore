@@ -18,15 +18,13 @@ export class ContractService {
         from:this.web3Service.account.address,
         gas:400000}).then((res)=>{
 
-            //TODO:SAVE IN DB
             this.userService.buyItem(userName,item).subscribe(
                 res=>console.log(res),
                 error=>console.error(error)
             );
 
         }).catch((error)=>{
-
-            //DONT SAVE IN DB
+            console.error(error);
         });
     }
     initContract(){

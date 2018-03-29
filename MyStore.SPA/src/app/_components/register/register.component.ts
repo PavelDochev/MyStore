@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit{
         this.loading = true;
         
         //web3 creates account 
-        var test = await this.web3Service.createNewAccount(this.model.password);
+        await this.web3Service.createNewAccount(this.model.password);
 
         //encrypt private key with password
         this.model.privateKey = (this.cryptoJSUtils.encrypt(this.web3Service.account.privateKey,this.model.password)).toString();
